@@ -4,7 +4,8 @@ import { useMapEvents } from "react-leaflet";
 
 export const MapComponent = () => {
   const mapEvent = useMapEvents({
-    click: () => {
+    click: (e) => {
+      console.log(e.latlng)
       mapEvent.locate();
     },
     locationfound: (location) => {

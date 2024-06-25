@@ -3,7 +3,7 @@ export interface ImplMarker {
   long: number;
   title: string;
   id: string;
-  categoryId?: string | null
+  categoryId: string | null
 }
 
 

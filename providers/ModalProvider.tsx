@@ -3,7 +3,9 @@
 import { useEffect, useState } from "react";
 
 import { NewCategoryModal } from "@/components/modals/NewCategoryModal";
+
 import { NewMarkerModal } from "@/components/modals/NewMarkerModal";
+import { EditMarkerModal } from "@/components/modals/EditMarkerModal";
 
 export const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -17,6 +19,7 @@ export const ModalProvider = () => {
   return (
     <>
       <NewMarkerModal />
+      <EditMarkerModal />
       <NewCategoryModal />
     </>
   );

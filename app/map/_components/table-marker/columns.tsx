@@ -1,6 +1,6 @@
 "use client";
 
-import { EyeIcon, MoreHorizontal, TrashIcon } from "lucide-react";
+import { EditIcon, EyeIcon, MoreHorizontal, TrashIcon } from "lucide-react";
 
 import { toast } from "sonner";
 import { ColumnDef } from "@tanstack/react-table";
@@ -19,6 +19,7 @@ import {
 
 import { ImplMarker } from "@/model";
 import Link from "next/link";
+import { useEditMarkerModal } from "@/hooks/useEditMarkerModal";
 
 export const columns: ColumnDef<ImplMarker>[] = [
   {
@@ -36,13 +37,20 @@ export const columns: ColumnDef<ImplMarker>[] = [
       );
     },
   },
+  // {
+  //   accessorKey: "lat",
+  //   header: "Latitude",
+  // },
+  // {
+  //   accessorKey: "long",
+  //   header: "Longitude",
+  // },
   {
-    accessorKey: "lat",
-    header: "Latitude",
-  },
-  {
-    accessorKey: "long",
-    header: "Longitude",
+    accessorKey: "categoryId",
+    header: "Category",
+    cell: ({ row }) => {
+      return <CellCategory data={row.original} />;
+    },
   },
   {
     accessorKey: "actions",
@@ -53,8 +61,22 @@ export const columns: ColumnDef<ImplMarker>[] = [
   },
 ];
 
+const CellCategory = ({ data }: { data: ImplMarker }) => {
+  const categories = useMarkerStore((state) => state.categories);
+
+  const foundCategory = categories.find((cat) => cat.id === data.categoryId);
+
+  if (!foundCategory) {
+    return <div>Empty</div>;
+  } else {
+    return <div>{foundCategory.name}</div>;
+  }
+};
+
 const CellActions = ({ data }: { data: ImplMarker }) => {
   const markerStore = useMarkerStore();
+  const editMarkerModal = useEditMarkerModal();
+
   const onDelete = () => {
     markerStore.deleteMarker(data.id);
     toast.success(`Deleted marker with title: ${data.title}`);
@@ -63,6 +85,10 @@ const CellActions = ({ data }: { data: ImplMarker }) => {
   const onView = () => {
     console.log("View detail information of the current pointer");
     // router.push(`/map?position=${data.lat},${data.long}`);
+  };
+
+  const onEdit = () => {
+    editMarkerModal.onOpen(data.id);
   };
 
   return (
@@ -82,6 +108,13 @@ const CellActions = ({ data }: { data: ImplMarker }) => {
         >
           View&nbsp;
           <EyeIcon size={16} />
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={onEdit}
+          className="hover:bg-accent hover:text-accent-foreground cursor-pointer"
+        >
+          Edit&nbsp;
+          <EditIcon size={16} />
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={onDelete}

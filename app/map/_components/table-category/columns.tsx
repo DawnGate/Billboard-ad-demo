@@ -30,7 +30,7 @@ export const columns: ColumnDef<ImplCategory>[] = [
     cell: ({ row }) => {
       return (
         <div
-          className="h-[24px] w-[100px] rounded-md"
+          className="h-6 w-6 rounded-full border-2"
           style={{ backgroundColor: row.original.color }}
         ></div>
       );
