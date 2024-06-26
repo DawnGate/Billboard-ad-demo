@@ -29,7 +29,7 @@ export const columns: ColumnDef<ImplMarker>[] = [
       const data = row.original;
       return (
         <Link
-          href={`/map?position=${data.lat},${data.long}`}
+          href={`/map?position=${data.lat},${data.lng}`}
           className="cursor-pointer text-sky-500 underline-offset-2 hover:underline"
         >
           {row.original.title}
@@ -45,13 +45,7 @@ export const columns: ColumnDef<ImplMarker>[] = [
   //   accessorKey: "long",
   //   header: "Longitude",
   // },
-  {
-    accessorKey: "categoryId",
-    header: "Category",
-    cell: ({ row }) => {
-      return <CellCategory data={row.original} />;
-    },
-  },
+
   {
     accessorKey: "actions",
     header: "Actions",
@@ -60,18 +54,6 @@ export const columns: ColumnDef<ImplMarker>[] = [
     },
   },
 ];
-
-const CellCategory = ({ data }: { data: ImplMarker }) => {
-  const categories = useMarkerStore((state) => state.categories);
-
-  const foundCategory = categories.find((cat) => cat.id === data.categoryId);
-
-  if (!foundCategory) {
-    return <div>Empty</div>;
-  } else {
-    return <div>{foundCategory.name}</div>;
-  }
-};
 
 const CellActions = ({ data }: { data: ImplMarker }) => {
   const markerStore = useMarkerStore();
@@ -104,21 +86,21 @@ const CellActions = ({ data }: { data: ImplMarker }) => {
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={onView}
-          className="hover:bg-accent hover:text-accent-foreground cursor-pointer"
+          className="cursor-pointer hover:bg-accent hover:text-accent-foreground"
         >
           View&nbsp;
           <EyeIcon size={16} />
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={onEdit}
-          className="hover:bg-accent hover:text-accent-foreground cursor-pointer"
+          className="cursor-pointer hover:bg-accent hover:text-accent-foreground"
         >
           Edit&nbsp;
           <EditIcon size={16} />
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={onDelete}
-          className="hover:bg-destructive hover:text-destructive-foreground cursor-pointer"
+          className="cursor-pointer hover:bg-destructive hover:text-destructive-foreground"
         >
           Delete&nbsp;
           <TrashIcon size={16} />

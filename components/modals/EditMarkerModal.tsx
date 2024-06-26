@@ -46,8 +46,8 @@ export const EditMarkerModal = () => {
     const marker = {
       title: String(title),
       lat: Number(lat),
-      long: Number(long),
-      categoryId: categoryId === "empty" ? null : String(categoryId),
+      lng: Number(long),
+      companyId: null,
       id: markerInfo.id,
     };
 
@@ -102,20 +102,20 @@ export const EditMarkerModal = () => {
                 </Label>
                 <Input
                   required
-                  defaultValue={markerInfo.long}
+                  defaultValue={markerInfo.lng}
                   id="longitude"
                   name="longitude"
                   placeholder="106.71"
                   className="col-span-3"
                 />
               </div>
-              <div className="grid grid-cols-4 items-center gap-4">
+              {/* <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="longitude" className="text-right">
                   Category:
                 </Label>
                 <Select
                   name="category"
-                  defaultValue={markerInfo.categoryId ?? ""}
+                  defaultValue={markerInfo.companyId ?? ""}
                 >
                   <SelectTrigger className="col-span-3">
                     <SelectValue placeholder="Category" />
@@ -129,7 +129,7 @@ export const EditMarkerModal = () => {
                     <SelectItem value="empty">No Category</SelectItem>
                   </SelectContent>
                 </Select>
-              </div>
+              </div> */}
             </div>
             <DialogFooter>
               <Button type="submit">Update</Button>
