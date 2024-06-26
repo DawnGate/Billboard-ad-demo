@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { ModalProvider } from "@/providers/ModalProvider";
 import { SidebarContent } from "./_components/sidebar-content";
 import { Header } from "./_components/Header";
+import { SheetProvider } from "@/providers/SheetProvider";
 
 const LazyMap = dynamic(() => import("@/components/map/Map"), {
   ssr: false,
@@ -31,6 +32,7 @@ const Page = () => {
         <LazyMap />
       </div>
       <ModalProvider />
+      <SheetProvider />
     </>
   );
 };
