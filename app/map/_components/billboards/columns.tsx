@@ -1,13 +1,36 @@
 "use client";
 
+import { ReactNode } from "react";
+
+import { ArrowUpDown } from "lucide-react";
+
 import { ColumnDef } from "@tanstack/react-table";
 
 import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from "@/components/ui/button";
 
 import { ImplBillBoard } from "@/model";
-import { Button } from "@/components/ui/button";
-import { ArrowUpDown } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+
+import { useBillboardStore } from "@/hooks/useBillboardStore";
+
+const LocationCell = ({
+  children,
+  billboardId,
+}: {
+  children: ReactNode;
+  billboardId: string;
+}) => {
+  const selectBillboard = useBillboardStore((state) => state.selectBillboard);
+  const handleClick = () => {
+    selectBillboard(billboardId);
+  };
+  return (
+    <Button variant="link" className="cursor-pointer" onClick={handleClick}>
+      {children}
+    </Button>
+  );
+};
 
 export const columns: ColumnDef<ImplBillBoard>[] = [
   {
@@ -36,7 +59,7 @@ export const columns: ColumnDef<ImplBillBoard>[] = [
     accessorKey: "name",
     header: ({ column }) => {
       return (
-        <div className="flex w-[200px] items-center gap-2">
+        <div className="flex w-[250px] items-center gap-2">
           <p>Name</p>
           <Button
             variant="ghost"
@@ -64,9 +87,11 @@ export const columns: ColumnDef<ImplBillBoard>[] = [
     cell: ({ row }) => {
       const location = row.original.location;
       return (
-        <div className="line-clamp-1 w-[200px]">
-          <p>{location}</p>
-        </div>
+        <LocationCell billboardId={row.original.id}>
+          <div className="line-clamp-1 w-[200px]">
+            <p>{location}</p>
+          </div>
+        </LocationCell>
       );
     },
   },

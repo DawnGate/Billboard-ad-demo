@@ -1,12 +1,16 @@
 "use client";
 
+import { useBillboardStore } from "@/hooks/useBillboardStore";
 import { isNumeric } from "@/lib/utils";
+import { mockBillboards } from "@/model/mockData";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useMap } from "react-leaflet";
 
 export const UpdateCenterBySearchParams = () => {
   const searchParams = useSearchParams();
+
+  const billboardId = useBillboardStore((state) => state.billBoardId);
 
   const [newCenter, setNewCenter] = useState<[number, number] | null>(null);
 
@@ -21,6 +25,16 @@ export const UpdateCenterBySearchParams = () => {
     // update map
   }, [position]);
 
+  useEffect(() => {
+    if (billboardId) {
+      const foundBillboard = mockBillboards.find(
+        (billboard) => billboard.id === billboardId,
+      );
+      if (!foundBillboard) return;
+      setNewCenter([foundBillboard.lat, foundBillboard.lng]);
+    }
+  }, [billboardId]);
+
   if (!newCenter) {
     return;
   }
@@ -30,6 +44,6 @@ export const UpdateCenterBySearchParams = () => {
 
 const UpdateCenter = ({ lat, long }: { lat: number; long: number }) => {
   const map = useMap();
-  map.panTo([lat, long]);
+  map.flyTo([lat, long], 15);
   return null;
 };

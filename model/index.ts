@@ -1,9 +1,9 @@
 export interface ImplMarker {
   lat: number;
-  long: number;
+  lng: number;
   title: string;
   id: string;
-  categoryId: string | null;
+  companyId: string | null;
 }
 
 export interface ImplCategory {
@@ -24,7 +24,7 @@ export interface ImplBillBoard {
   name: string;
   location: string;
   lat: number;
-  long: number;
+  lng: number;
   led: {
     from: string;
     to: string;

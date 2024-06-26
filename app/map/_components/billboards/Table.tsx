@@ -4,6 +4,6 @@ import { mockBillboards } from "@/model/mockData";
 
 import { columns } from "./columns";
 
-export const BillboardTable = () => {
+export const Table = () => {
   return <DataTable columns={columns} data={mockBillboards} />;
 };

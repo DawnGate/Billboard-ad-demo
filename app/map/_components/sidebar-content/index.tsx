@@ -15,7 +15,14 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { cn } from "@/lib/utils";
 
-import { BillboardsTab } from "../billboards";
+import dynamic from "next/dynamic";
+
+const BillboardsTab = dynamic(() =>
+  import("../billboards").then((res) => res.BillboardsTab),
+);
+const CompaniesTab = dynamic(() =>
+  import("../companies").then((res) => res.CompaniesTab),
+);
 
 export const SidebarContent = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -81,7 +88,8 @@ export const SidebarContent = () => {
               </TabsList>
             </Tabs>
 
-            <BillboardsTab />
+            {tabValue === "Billboards" && <BillboardsTab />}
+            {tabValue === "Companies" && <CompaniesTab />}
           </>
         )}
       </div>
