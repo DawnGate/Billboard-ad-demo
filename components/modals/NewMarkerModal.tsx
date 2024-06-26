@@ -42,8 +42,8 @@ export const NewMarkerModal = () => {
     const marker = {
       title: String(title),
       lat: Number(lat),
-      long: Number(long),
-      categoryId: categoryId === "empty" ? null : String(categoryId),
+      lng: Number(long),
+      companyId: null,
     };
 
     markerStore.addMarker(marker);

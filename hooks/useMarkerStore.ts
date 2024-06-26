@@ -17,53 +17,53 @@ const defaultMarkers: ImplMarker[] = [
     id: "1",
     title: "Coffee Shop 1",
     lat: 10.8016751,
-    long: 106.714055,
-    categoryId: "123",
+    lng: 106.714055,
+    companyId: "123",
   },
   {
     id: "2",
     title: "Coffee Shop 2",
     lat: 10.7930862,
-    long: 106.7007836,
-    categoryId: "123",
+    lng: 106.7007836,
+    companyId: "123",
   },
   {
     id: "3",
     title: "Coffee Shop 3",
     lat: 10.801948,
-    long: 106.7099689,
-    categoryId: "123",
+    lng: 106.7099689,
+    companyId: "123",
   },
   {
     id: "4",
     title: "Coffee Shop 4",
     lat: 10.7878873,
-    long: 106.7211247,
-    categoryId: "123",
+    lng: 106.7211247,
+    companyId: "123",
   },
 
   {
     id: "5",
     title: "Clothes Shop 1",
     lat: 10.77901120762816,
-    long: 106.71175003051759,
-    categoryId: "124",
+    lng: 106.71175003051759,
+    companyId: "124",
   },
 
   {
     id: "6",
     title: "Clothes Shop 2",
     lat: 10.81155552903164,
-    long: 106.73337936401369,
-    categoryId: "124",
+    lng: 106.73337936401369,
+    companyId: "124",
   },
 
   {
     id: "7",
     title: "Clothes Shop 3",
     lat: 10.798824880061588,
-    long: 106.68102264404298,
-    categoryId: "124",
+    lng: 106.68102264404298,
+    companyId: "124",
   },
 ];
 
@@ -139,8 +139,8 @@ export const useMarkerStore = create<StoreProps>((set, get) => ({
 
     const markers = get().markers;
     const filterMarkers = markers.map((item) => {
-      if (item.categoryId === id) {
-        return { ...item, categoryId: null };
+      if (item.companyId === id) {
+        return { ...item, companyId: null };
       }
       return item;
     });
