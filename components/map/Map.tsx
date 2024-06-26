@@ -7,13 +7,17 @@ import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 
 import "leaflet-defaulticon-compatibility";
 // END: Preserve spaces to avoid auto-sorting
+
 import { MapContainer, TileLayer } from "react-leaflet";
+
+import { positionHcm } from "@/lib/constants";
+
 import { MapComponent } from "./MapComponent";
 import { UpdateCenterBySearchParams } from "./UpdateCenter";
 
-import { positionHcm } from "@/lib/constants";
 import { MapMarkers } from "./MapMarkers";
 import { MapCategoryPolylines } from "./MapCategoryPolylines";
+import { MapLayers } from "./MapLayers";
 
 const Map = () => {
   return (
@@ -22,7 +26,7 @@ const Map = () => {
       center={positionHcm}
       zoom={12}
       scrollWheelZoom={true}
-      style={{ height: "100%" }}
+      style={{ height: "100%", width: "100%" }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -31,6 +35,7 @@ const Map = () => {
       <MapMarkers />
       <MapCategoryPolylines />
       <MapComponent />
+      <MapLayers />
       <UpdateCenterBySearchParams />
     </MapContainer>
   );

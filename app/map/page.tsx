@@ -1,10 +1,12 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
-import { ListMarkerSidebar } from "./_components/sidebar-marker";
+// import { ListMarkerSidebar } from "./_components/sidebar-marker";
 
 import dynamic from "next/dynamic";
 
 import { ModalProvider } from "@/providers/ModalProvider";
+import { SidebarContent } from "./_components/sidebar-content";
+import { Header } from "./_components/Header";
 
 const LazyMap = dynamic(() => import("@/components/map/Map"), {
   ssr: false,
@@ -15,13 +17,20 @@ const LazyMap = dynamic(() => import("@/components/map/Map"), {
   ),
 });
 
+const HEADER_HEIGHT = 64
+
 const Page = () => {
   return (
-    <div className="h-screen w-screen">
-      <LazyMap />
-      <ListMarkerSidebar />
+    <>
+      <Header height={HEADER_HEIGHT} />
+      <div className="flex" style={{
+        height: `calc(100vh - ${HEADER_HEIGHT}px)`
+      }}>
+        <SidebarContent />
+        <LazyMap />
+      </div>
       <ModalProvider />
-    </div>
+    </>
   );
 };
 
