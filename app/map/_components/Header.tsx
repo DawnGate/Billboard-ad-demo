@@ -4,33 +4,38 @@ import { Input } from "@/components/ui/input";
 import { MenuIcon } from "lucide-react";
 
 interface Props {
-  height: number
+  height: number;
 }
 
-export const Header = ({height}: Props) => {
+export const Header = ({ height }: Props) => {
   return (
-    <div className="container bg-white shadow-sm">
-      <div className="flex items-center" style={{
-        height: height
-      }}>
-        <div className="flex items-center gap-2">
-          <Button size="icon">
-            <MenuIcon />
-          </Button>
-          <div className="font-semibold">
-            <p>Genie OOH</p>
+    <div className="bg-white shadow-sm">
+      <div className="container">
+        <div
+          className="flex items-center"
+          style={{
+            height: height,
+          }}
+        >
+          <div className="flex items-center gap-2">
+            <Button size="icon">
+              <MenuIcon />
+            </Button>
+            <div className="font-semibold">
+              <p>Genie OOH</p>
+            </div>
           </div>
-        </div>
-        <div className="ml-auto">
-          <div className="flex items-center space-x-4">
-            <Input placeholder="Search" />
-            <Avatar className="border border-primary">
-              <AvatarImage
-                src="https://github.com/Dawngate.png"
-                alt="@DawnGate"
-              />
-              <AvatarFallback>DG</AvatarFallback>
-            </Avatar>
+          <div className="ml-auto">
+            <div className="flex items-center space-x-4">
+              <Input placeholder="Search" />
+              <Avatar className="border border-primary">
+                <AvatarImage
+                  src="https://github.com/Dawngate.png"
+                  alt="@DawnGate"
+                />
+                <AvatarFallback>DG</AvatarFallback>
+              </Avatar>
+            </div>
           </div>
         </div>
       </div>
